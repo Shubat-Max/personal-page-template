@@ -1,1 +1,1 @@
-# personal-page-template
+# Personal page - template
