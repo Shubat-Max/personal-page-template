@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "author": "Shubat Maksim",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
 	"browser-sync": "^2.2.3",
     "gulp": "^3.8.11",

@@ -5,7 +5,7 @@
   "authors": [
     "Shubat Maksim"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "",
   "ignore": [
     "**/.*",
