@@ -11,8 +11,10 @@
         8. Project Styles
         9. Skills Styles
         10. Contact Styles
-        11. Optional Section Styles
-        12. Media Queries
+        11. Character Styles
+        12. Cookie Styles
+        13. Optional Section Styles
+        14. Media Queries
 */
 
 /*
@@ -22,12 +24,13 @@
 */
 
 // Define base and accent colors
-$base-color: #36db30;
+$base-color: #393939;
 $base-color-hover: darken($base-color, 10%);
 
 // Define background colors
 $background: #fff;
 $background-alt: #f2f2f5;
+$background-cookie: #d1d1d1;
 
 // Define border colors
 $border: #dcd9d9;
@@ -64,6 +67,16 @@ $text: #74808a;
     &:-ms-input-placeholder {
         @content;
     }
+}
+
+@mixin noselect($value) {
+    -webkit-touch-callout: $value; /* iOS Safari */
+      -webkit-user-select: $value; /* Safari */
+       -khtml-user-select: $value; /* Konqueror HTML */
+         -moz-user-select: $value; /* Firefox */
+          -ms-user-select: $value; /* Internet Explorer/Edge */
+              user-select: $value; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 /*
@@ -369,7 +382,7 @@ footer {
         color: lighten($base-color, 25%);
         font-weight: 500;
         font-size: 2.25em;
-        margin-bottom: 15px;
+        margin: 10px 0 15px 0;
     }
 }
 
@@ -436,14 +449,41 @@ footer {
 #about {
     padding: 75px 15px;
     border-bottom: 1px solid $border;
+    color: $text;
+    text-align: justify;
 
-    h2 {
+    h2{
         color: $heading;
     }
 
     p {
         color: $text;
         margin: 0;
+    }
+
+    .reasons {
+        margin: 20px 0 10px 0;
+
+        h4 {
+            margin: 20px 0 10px 0;
+            font-weight: 700;
+        }
+
+        ol {
+            list-style-type: none;
+            counter-reset: elementcounter;
+            padding: 0;
+
+            li {
+                word-spacing: 2px;
+                margin: 5px 0 5px 0;
+
+                &:before {
+                    content: "Reason #" counter(elementcounter) ": ";
+                    counter-increment: elementcounter;
+                }
+            }
+        }
     }
 }
 
@@ -516,10 +556,19 @@ footer {
         margin: 0 0 15px 0;
     }
 
-    p {
+    p, ul>li {
         color: $text;
         font-size: 0.9em;
+        padding: 0;
         margin: 0;
+    }
+
+    p {
+      margin: 10px 0 0 0;
+    }
+
+    ul {
+      margin: 0 0 10px -20px ;
     }
 }
 
@@ -640,6 +689,13 @@ footer {
 
 .project-image {
     float: left;
+    width: 300px;
+    height: 300px;
+
+    img {
+      height: 300px;
+      width: 300px;
+    }
 }
 
 .project-info {
@@ -702,9 +758,9 @@ footer {
 }
 
 /*
-    -------------------------------
+    ------------------------------
     ----- 10. Contact Styles -----
-    -------------------------------
+    ------------------------------
 */
 
 #contact {
@@ -768,7 +824,113 @@ footer {
 
 /*
     ---------------------------------------
-    ----- 11. Optional Section Styles -----
+    -------- 11. Character Styles ---------
+    ---------------------------------------
+*/
+
+.character_block {
+    $character_width: 300px;
+    $character_height: 255px;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 8000;
+
+    .character {
+        img.body, img.face {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: $character_width;
+        }
+
+        img.body {
+            z-index: 8001;
+        }
+
+        img.face {
+          z-index: 8002;
+        }
+    }
+
+    .character_cover {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: $character_width;
+        height: $character_height;
+        z-index: 9000;
+    }
+
+}
+
+/*
+    --------------------------------------
+    --------- 12. Cookies Styles ---------
+    --------------------------------------
+*/
+.cookie-warning {
+  background: rgba($background-cookie, 0.9);
+  color: lighten($heading, 10%);
+  font-size: 14px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 400px;
+  padding: 10px 20px;
+  z-index: 9999;
+
+  h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: $heading;
+      margin: 10px 0;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  .action-bar {
+      margin: 10px 0 0 0;
+
+      .accept {
+          float: left;
+          padding: 5px 15px;
+          border: 1px solid $base-color;
+          cursor: pointer;
+          font-weight: 700;
+          color: $base-color;
+          @include noselect(none);
+
+          &:hover {
+              background: rgba($base-color, 0.9);
+              color: lighten($text, 100%);
+          }
+      }
+
+      .more {
+          float: right;
+          margin: 10px 0;
+          @include noselect(none);
+
+          &:hover {
+              text-decoration: underline;
+          }
+
+          a {
+            text-decoration: none;
+            color: $base-color;
+          }
+      }
+  }
+}
+
+
+/*
+    ---------------------------------------
+    ----- 13. Optional Section Styles -----
     ---------------------------------------
 */
 
@@ -816,7 +978,7 @@ footer {
 
 /*
     -----------------------------
-    ----- 12. Media Queries -----
+    ----- 14. Media Queries -----
     -----------------------------
 */
 
@@ -932,8 +1094,13 @@ footer {
     }
 
     .education-block {
+        text-align: center;
+
         h3, span {
             float: none;
+        }
+        h4 {
+          margin: 10px 0 5px 0;
         }
     }
 
@@ -956,6 +1123,11 @@ footer {
         text-align: center;
     }
 
+    #about {
+        p {
+            text-align: justify;
+        }
+    }
 }
 
 // Extra Small Devices
@@ -976,4 +1148,10 @@ footer {
         }
     }
 
+    .cookie-warning {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
 }

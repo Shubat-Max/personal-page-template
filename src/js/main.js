@@ -9,4 +9,7 @@
 /*
  * Custom JS
  */
+//= particles/config.js
+//= particles/cookieHandler.js
+//= particles/character.js
 //= particles/common.js

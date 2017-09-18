@@ -1,5 +1,6 @@
 (function($) {
 
+    var _CH = new CookieHandler();
     // Remove no-js class
     $('html').removeClass('no-js');
 
@@ -82,4 +83,30 @@
         });
     });
 
+    // If hcw (hide cookie warning) is written already, don't show cookie warning
+    if(_CH.getCookie('hcw') === ''){
+        $('.cookie-warning').show();
+
+        // Smoothly slide away cookie warning block
+        $('.accept').unbind().click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            var $ckBlock = $(e.target).closest('.cookie-warning');
+            var ckWriter = setTimeout(function(){
+                _CH.setCookie('hcw', 'true', 31556926);
+                clearTimeout(ckWriter);
+            });
+            $ckBlock.animate({
+                left:  "+="+$this.parent().width()*2
+            }, 500, function(){
+                $ckBlock.hide().remove();
+            });
+        });
+    }
+
+    if(_CharacterDisabled !== null && !_CharacterDisabled){
+        // Init character
+        var _Moe = new Character();
+        _Moe.init();
+    }
 })(jQuery);
